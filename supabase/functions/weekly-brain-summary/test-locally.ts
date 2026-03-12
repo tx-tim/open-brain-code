@@ -7,7 +7,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { PROMPT_BUILDERS, PROMPT_VARIANT } from "./prompt-utils.ts";
 
 // Load .env from repo root
-const envPath = new URL("../../.env", import.meta.url).pathname;
+const envPath = new URL("../../../.env", import.meta.url).pathname;
 const envText = await Deno.readTextFile(envPath);
 for (const line of envText.split("\n")) {
   const trimmed = line.trim();

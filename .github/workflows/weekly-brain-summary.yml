@@ -1,0 +1,23 @@
+name: Weekly Brain Summary
+
+on:
+  schedule:
+    - cron: '0 11 * * 1'  # Monday 6am CDT (UTC-5)
+  workflow_dispatch:       # allow manual trigger from GitHub UI
+
+jobs:
+  invoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke weekly-brain-summary edge function
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            https://ateddwjvwlprudbnmjae.supabase.co/functions/v1/weekly-brain-summary \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Content-Type: application/json" \
+            --max-time 60)
+          echo "HTTP status: $response"
+          if [ "$response" != "200" ]; then
+            echo "Function returned non-200 status: $response"
+            exit 1
+          fi

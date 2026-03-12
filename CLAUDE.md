@@ -3,7 +3,6 @@
 This repo contains Supabase Edge Functions for the Open Brain personal
 knowledge system.
 
-- Supabase project ref: `ateddwjvwlprudbnmjae`
 - Existing function: `ingest-thought` — reference this for Deno conventions
 - New function: `weekly-brain-summary` — queries thoughts table, summarizes
   via Gemini API, posts to Slack on Monday mornings
